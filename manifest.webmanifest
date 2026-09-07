@@ -1,0 +1,18 @@
+{
+  "name": "L'Informazione in Casa Ave",
+  "short_name": "Casa Ave",
+  "description": "Palermo, Serie B e Serie A: risultati, calendario, news e partite live.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0b0f",
+  "theme_color": "#ff007a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
