@@ -1,9 +1,7 @@
-L'INFORMAZIONE IN CASA AVE — V8
-Versione PWA mobile-first con collegamento ai dati calcio online.
+L’INFORMAZIONE IN CASA AVE — V15 COMPLETE
 
-DATI: usa gli endpoint JSON pubblici di ESPN per scoreboard, calendario, news e classifiche di Serie A e Serie B. Nessuna API key.
-PALERMO: ID ESPN 2923, Serie B ita.2.
+Live Score mobile-first con Palermo al centro.
 
-PUBBLICAZIONE: caricare la cartella su hosting HTTPS (GitHub Pages va bene). Poi aprire il link in Chrome e scegliere Aggiungi alla schermata Home.
+Funzioni: LIVE Serie A/B, filtri, giornata precedente/successiva, dettaglio partita con eventi quando disponibili, Palermo live/calendario/risultati/classifica/news, classifiche, marcatori, news filtrabili e ricerca, aggiornamento automatico.
 
-NOTIFICHE: la versione successiva può aggiungere push reali per gol/cartellini anche ad app chiusa; serve un piccolo servizio backend.
+Dati: endpoint pubblici ESPN. Traduzione news EN→IT tramite MyMemory quando necessaria. Nessuno streaming video incluso.

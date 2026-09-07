@@ -1,17 +1,10 @@
 {
-  "name": "L'Informazione in Casa Ave",
-  "short_name": "Casa Ave",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#07090b",
-  "theme_color": "#080a0d",
-  "lang": "it",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "name":"L'Informazione in Casa Ave — Live Score",
+  "short_name":"Ave Live Score",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#07090c",
+  "theme_color":"#ef8bb4",
+  "lang":"it",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
