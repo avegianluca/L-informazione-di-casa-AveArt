@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0d"><link rel="manifest" href="manifest.webmanifest">
+<title>L'Informazione in Casa Ave</title>
+<style>
+:root{--pink:#f08bb2;--bg:#07090b;--card:#15191d;--line:#292f35;--muted:#9ba3aa}
+*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:84px}
+header{position:sticky;top:0;z-index:5;background:#090b0eee;backdrop-filter:blur(12px);border-bottom:1px solid #181c20;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border:2px solid var(--pink);border-radius:12px;display:grid;place-items:center;font-size:21px}
+.brand{font-size:13px;font-weight:900;line-height:1.05}.brand small{display:block;color:var(--pink);font-size:7px;letter-spacing:1.2px;margin-top:4px}
+main{padding:12px}.page{display:none}.page.active{display:block}
+.hero{border-radius:19px;padding:20px;min-height:190px;display:flex;align-items:end;background:radial-gradient(circle at 75% 15%,#793e58,#24151d 43%,#0b0e11 82%)}
+.kicker{color:var(--pink);font-size:10px;font-weight:900;letter-spacing:1px}.hero h1{font-size:27px;margin:6px 0}.hero p{color:#d3d8dc;font-size:12px;line-height:1.45}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px;margin-top:10px}
+.live{border-color:#854a67;background:linear-gradient(145deg,#24131c,#15191d)}.live b{font-size:18px}.pink{color:var(--pink)}.muted{color:var(--muted);font-size:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;min-height:96px}.tile.hot{border-color:#814861}.ico{font-size:23px}.tile b{display:block;margin-top:7px;font-size:13px}.tile small{color:var(--muted);font-size:9px}
+.section{display:flex;justify-content:space-between;align-items:center;margin:17px 2px 8px}.section h2{font-size:15px;margin:0}
+.news{padding:12px;background:var(--card);border:1px solid var(--line);border-radius:13px;margin-top:8px}.news small{color:var(--pink);font-weight:900;font-size:8px}.news b{display:block;font-size:12px;margin-top:4px}.news p{font-size:9px;color:var(--muted);margin:5px 0}
+.score{display:flex;justify-content:center;align-items:center;gap:20px;padding:18px}.team{text-align:center;width:38%;font-size:11px}.badge{width:48px;height:48px;border-radius:50%;background:#272c31;display:grid;place-items:center;margin:0 auto 7px;font-weight:900}.pal{background:#291720;color:var(--pink);border:1px solid #80465f}.result{font-size:24px;font-weight:1000}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:10px}th,td{padding:9px 6px;border-bottom:1px solid #252a2f;text-align:center}th{font-size:8px;color:var(--muted)}td:nth-child(2){text-align:left}.me{background:#f08bb211}
+button{font:inherit}.btn{width:100%;border:0;border-radius:11px;padding:12px;background:var(--pink);color:#160a10;font-weight:900}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:78px;background:#0a0c0ef8;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);z-index:10}
+.nav{border:0;background:none;color:#7f878e;font-size:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.nav.active{color:var(--pink)}.nav span{font-size:17px}
+.notice{display:none;position:fixed;top:65px;left:50%;transform:translateX(-50%);width:min(450px,92%);z-index:20;background:#20131a;border:1px solid #8c4d69;border-radius:13px;padding:12px;font-size:11px}.notice.show{display:block}
+</style></head><body><div class="app">
+<header><div class="logo">⚽</div><div class="brand">L'INFORMAZIONE IN CASA AVE<small>IL CALCIO SEMPRE CON TE</small></div><div style="margin-left:auto;font-size:21px">🔔</div></header>
+<div id="notice" class="notice">🔔 <b>Notifiche Palermo</b><br>Qui collegheremo gli avvisi per gol, risultato e novità.</div>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div><div class="kicker">PALERMO NEL CUORE</div><h1>Qui non è solo calcio.</h1><p>La tua app per seguire Palermo, Serie B e Serie A.</p></div></div>
+<div class="card live"><div class="pink" style="font-size:9px;font-weight:900">📡 PALERMO LIVE</div><b>Pronto per la diretta</b><p class="muted">Qui appariranno partita, risultato, gol, cartellini e sostituzioni.</p></div>
+<div class="grid">
+<div class="tile hot" onclick="go('palermo')"><div class="ico">🩷</div><b>PALERMO</b><small>Partite e classifica</small></div>
+<div class="tile" onclick="go('b')"><div class="ico">⚽</div><b>SERIE B</b><small>Classifica e marcatori</small></div>
+<div class="tile" onclick="go('a')"><div class="ico">🏆</div><b>SERIE A</b><small>Risultati e calendario</small></div>
+<div class="tile" onclick="go('news')"><div class="ico">📰</div><b>NEWS</b><small>Ultime notizie</small></div>
+</div>
+<div class="section"><h2>Palermo oggi</h2><span class="pink">LIVE</span></div><div id="homePalermo" class="card live"><div class="muted">Caricamento dati reali…</div></div><div class="section"><h2>Ultime news</h2><span class="pink">LIVE</span></div><div id="homeNews"><div class="muted">Caricamento news…</div></div>
+</section>
+<section id="palermo" class="page"><div class="section"><h2>🩷 Palermo</h2><span class="pink">2026/27</span></div>
+<div id="palLive" class="card"><div class="muted">Caricamento partita…</div></div><div class="section"><h2>Calendario e risultati</h2></div><div id="palGames"><div class="muted">Caricamento…</div></div><div class="section"><h2>News Palermo</h2></div><div id="palNews"><div class="muted">Caricamento…</div></div>
+</section>
+<section id="b" class="page"><div class="section"><h2>⚽ Serie B</h2><span class="pink">CLASSIFICA</span></div>
+<div id="bTable"><div class="muted">Caricamento classifica reale…</div></div>
+</section>
+<section id="a" class="page"><div class="section"><h2>🏆 Serie A</h2></div><div id="aGames" class="card"><div class="muted">Caricamento partite…</div></div><div class="section"><h2>Classifica</h2></div><div id="aTable"><div class="muted">Caricamento classifica reale…</div></div></section>
+<section id="news" class="page"><div class="section"><h2>📰 News</h2></div><div id="allNews"><div class="muted">Caricamento news reali…</div></div></section>
+<section id="results" class="page"><div class="section"><h2>🥅 Risultati</h2></div><div class="card live"><b>📡 RISULTATI LIVE</b><p class="muted">Aggiornamento automatico delle partite disponibili.</p><div id="scores" style="margin-top:10px"><div class="muted">Caricamento…</div></div></div></section>
+</main>
+<nav>
+<button class="nav active" data-page="home"><span>⌂</span>Home</button><button class="nav" data-page="palermo"><span>🩷</span>Palermo</button><button class="nav" data-page="b"><span>⚽</span>Serie B</button><button class="nav" data-page="a"><span>🏆</span>Serie A</button><button class="nav" data-page="news"><span>📰</span>News</button><button class="nav" data-page="results"><span>🥅</span>Risultati</button>
+</nav></div>
+<script>
+const BASE='https://site.api.espn.com/apis/site/v2/sports/soccer/';
+const PAL='2923';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(path){const r=await fetch(BASE+path,{cache:'no-store'});if(!r.ok)throw Error(r.status);return r.json()}
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));scrollTo(0,0);if(id==='home')loadHome();if(id==='palermo')loadPalermo();if(id==='b')loadLeague('ita.2','bTable');if(id==='a')loadLeague('ita.1','aTable');if(id==='news')loadNews('ita.2','allNews');if(id==='results')loadScores('ita.2')}
+document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>go(x.dataset.page));
+function teams(e){const c=e.competitions?.[0]?.competitors||[];return {h:c.find(x=>x.homeAway==='home')||c[0]||{},a:c.find(x=>x.homeAway==='away')||c[1]||{}}}
+function date(v){return new Intl.DateTimeFormat('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(v))}
+function game(e){const {h,a}=teams(e);const score=h.score!=null&&a.score!=null?`${h.score} - ${a.score}`:'—';const st=e.status?.type?.shortDetail||e.status?.type?.detail||'';return `<div class="news"><small>${esc(date(e.date))} · ${esc(st)}</small><b>${esc(h.team?.displayName)} <span class="pink">${score}</span> ${esc(a.team?.displayName)}</b></div>`}
+function newsHTML(d){const a=d.articles||[];return a.slice(0,8).map(n=>`<div class="news"><small>NEWS</small><b>${esc(n.headline||n.title)}</b><p>${esc(n.description||'')}</p></div>`).join('')||'<div class="muted">Nessuna news disponibile.</div>'}
+async function loadHome(){try{const d=await api('ita.2/scoreboard');const p=(d.events||[]).find(e=>teams(e).h.team?.id===PAL||teams(e).a.team?.id===PAL);document.getElementById('homePalermo').innerHTML=p?game(p):'<div class="muted">Nessuna partita del Palermo oggi.</div>';const n=await api('ita.2/news');document.getElementById('homeNews').innerHTML=newsHTML(n)}catch(e){document.getElementById('homePalermo').innerHTML='<div class="muted">Dati live momentaneamente non disponibili.</div>'}}
+async function loadPalermo(){try{const d=await api(`ita.2/teams/${PAL}/schedule`);const ev=d.events||[];const next=ev.filter(e=>new Date(e.date)>=new Date()).slice(0,5);const prev=ev.filter(e=>new Date(e.date)<new Date()).slice(-5).reverse();const all=[...next,...prev];document.getElementById('palLive').innerHTML=next[0]?game(next[0]):'<div class="muted">Nessuna prossima partita trovata.</div>';document.getElementById('palGames').innerHTML=all.map(game).join('')||'<div class="muted">Nessuna partita trovata.</div>';const n=await api(`ita.2/teams/${PAL}/news`);document.getElementById('palNews').innerHTML=newsHTML(n)}catch(e){document.getElementById('palLive').innerHTML='<div class="muted">Dati Palermo non disponibili.</div>'}}
+async function loadLeague(league,tableId){try{const d=await api(league+'/scoreboard');const box=tableId==='bTable'?document.getElementById('bTable'):document.getElementById('aGames');box.innerHTML=(d.events||[]).slice(0,8).map(game).join('')||'<div class="muted">Nessuna partita disponibile.</div>';await standings(league,tableId)}catch(e){}}
+async function standings(league,tableId){const target=tableId==='bTable'?document.getElementById('bTable'):document.getElementById('aTable');try{const d=await fetch(`https://site.api.espn.com/apis/v2/sports/soccer/${league}/standings`).then(r=>r.json());const es=d.children?.flatMap(c=>c.standings?.entries||[])||[];const rows=es.map((x,i)=>{const st=Object.fromEntries((x.stats||[]).map(z=>[z.name,z.value]));return {n:x.team?.displayName||'',id:x.team?.id,g:st.gamesPlayed||st.gp||'',v:st.wins||'',n2:st.ties||st.draws||'',p:st.losses||'',dr:st.pointDifferential||st.goalDifference||'',pt:st.points||st.pts||''}});target.innerHTML='<table><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>N</th><th>P</th><th>DR</th><th>PT</th></tr>'+rows.map((r,i)=>`<tr class="${r.id===PAL?'me':''}"><td>${i+1}</td><td><b>${esc(r.n)}</b></td><td>${r.g}</td><td>${r.v}</td><td>${r.n2}</td><td>${r.p}</td><td>${r.dr}</td><td><b>${r.pt}</b></td></tr>`).join('')+'</table>'}catch(e){target.innerHTML='<div class="muted">Classifica non disponibile in questo momento.</div>'}}
+async function loadNews(league,target){try{document.getElementById(target).innerHTML=newsHTML(await api(league+'/news'))}catch(e){document.getElementById(target).innerHTML='<div class="muted">News non disponibili.</div>'}}
+async function loadScores(league){try{document.getElementById('scores').innerHTML=(await api(league+'/scoreboard')).events?.map(game).join('')||'<div class="muted">Nessuna partita oggi.</div>'}catch(e){document.getElementById('scores').innerHTML='<div class="muted">Risultati non disponibili.</div>'}}
+loadHome();
+setInterval(loadHome,30000);
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
