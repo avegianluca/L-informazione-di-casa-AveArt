@@ -1,84 +1,571 @@
 <!doctype html>
-<html lang="it"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080a0d"><link rel="manifest" href="manifest.webmanifest">
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0d">
+<link rel="manifest" href="manifest.webmanifest">
 <title>L'Informazione in Casa Ave</title>
-<style>
-:root{--pink:#f08bb2;--bg:#07090b;--card:#15191d;--line:#292f35;--muted:#9ba3aa}
-*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:84px}
-header{position:sticky;top:0;z-index:5;background:#090b0eee;backdrop-filter:blur(12px);border-bottom:1px solid #181c20;padding:12px 14px;display:flex;align-items:center;gap:10px}
-.logo{width:40px;height:40px;border:2px solid var(--pink);border-radius:12px;display:grid;place-items:center;font-size:21px}
-.brand{font-size:13px;font-weight:900;line-height:1.05}.brand small{display:block;color:var(--pink);font-size:7px;letter-spacing:1.2px;margin-top:4px}
-main{padding:12px}.page{display:none}.page.active{display:block}
-.hero{border-radius:19px;padding:20px;min-height:190px;display:flex;align-items:end;background:radial-gradient(circle at 75% 15%,#793e58,#24151d 43%,#0b0e11 82%)}
-.kicker{color:var(--pink);font-size:10px;font-weight:900;letter-spacing:1px}.hero h1{font-size:27px;margin:6px 0}.hero p{color:#d3d8dc;font-size:12px;line-height:1.45}
-.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px;margin-top:10px}
-.live{border-color:#854a67;background:linear-gradient(145deg,#24131c,#15191d)}.live b{font-size:18px}.pink{color:var(--pink)}.muted{color:var(--muted);font-size:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;min-height:96px}.tile.hot{border-color:#814861}.ico{font-size:23px}.tile b{display:block;margin-top:7px;font-size:13px}.tile small{color:var(--muted);font-size:9px}
-.section{display:flex;justify-content:space-between;align-items:center;margin:17px 2px 8px}.section h2{font-size:15px;margin:0}
-.news{padding:12px;background:var(--card);border:1px solid var(--line);border-radius:13px;margin-top:8px}.news small{color:var(--pink);font-weight:900;font-size:8px}.news b{display:block;font-size:12px;margin-top:4px}.news p{font-size:9px;color:var(--muted);margin:5px 0}.news a{display:inline-block;margin-top:8px;color:var(--pink);font-size:9px;font-weight:900;text-decoration:none}.liveBadge{display:inline-flex;align-items:center;gap:5px;color:#ff6b7a;font-size:9px;font-weight:1000}.dot{width:7px;height:7px;border-radius:50%;background:#ff3f56;box-shadow:0 0 8px #ff3f56;display:inline-block}.liveNow{border-color:#9d4d67;box-shadow:0 0 0 1px #5c263d inset}.minute{font-size:10px;color:#f3a0bd;font-weight:900}.tap{cursor:pointer}.refresh{font-size:9px;color:var(--muted)}
-.score{display:flex;justify-content:center;align-items:center;gap:20px;padding:18px}.team{text-align:center;width:38%;font-size:11px}.badge{width:48px;height:48px;border-radius:50%;background:#272c31;display:grid;place-items:center;margin:0 auto 7px;font-weight:900}.pal{background:#291720;color:var(--pink);border:1px solid #80465f}.result{font-size:24px;font-weight:1000}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:10px}th,td{padding:9px 6px;border-bottom:1px solid #252a2f;text-align:center}th{font-size:8px;color:var(--muted)}td:nth-child(2){text-align:left}.me{background:#f08bb211}
-button{font:inherit}.btn{width:100%;border:0;border-radius:11px;padding:12px;background:var(--pink);color:#160a10;font-weight:900}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:78px;background:#0a0c0ef8;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);z-index:10}
-.nav{border:0;background:none;color:#7f878e;font-size:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.nav.active{color:var(--pink)}.nav span{font-size:17px}
-.notice{display:none;position:fixed;top:65px;left:50%;transform:translateX(-50%);width:min(450px,92%);z-index:20;background:#20131a;border:1px solid #8c4d69;border-radius:13px;padding:12px;font-size:11px}.notice.show{display:block}
-</style></head><body><div class="app">
-<header><div class="logo">⚽</div><div class="brand">L'INFORMAZIONE IN CASA AVE<small>IL CALCIO SEMPRE CON TE</small></div><div style="margin-left:auto;font-size:21px">🔔</div></header>
-<div id="notice" class="notice">🔔 <b>Notifiche Palermo</b><br>Qui collegheremo gli avvisi per gol, risultato e novità.</div>
-<main>
-<section id="home" class="page active">
-<div class="hero"><div><div class="kicker">PALERMO NEL CUORE</div><h1>Qui non è solo calcio.</h1><p>La tua app per seguire Palermo, Serie B e Serie A.</p></div></div>
-<div class="card live liveNow"><div class="liveBadge"><span class="dot"></span> LIVE IN TEMPO REALE <span id="liveClock" class="minute"></span></div><div id="homeLive"><p class="muted">Controllo delle partite in corso…</p></div><div class="refresh">Aggiornamento automatico ogni 15 secondi</div></div>
-<div class="grid">
-<div class="tile hot" onclick="go('palermo')"><div class="ico">🩷</div><b>PALERMO</b><small>Partite e classifica</small></div>
-<div class="tile" onclick="go('b')"><div class="ico">⚽</div><b>SERIE B</b><small>Classifica e marcatori</small></div>
-<div class="tile" onclick="go('a')"><div class="ico">🏆</div><b>SERIE A</b><small>Risultati e calendario</small></div>
-<div class="tile" onclick="go('news')"><div class="ico">📰</div><b>NEWS</b><small>Ultime notizie</small></div>
-</div>
-<div class="section"><h2>Palermo oggi</h2><span class="pink">LIVE</span></div><div id="homePalermo" class="card live"><div class="muted">Caricamento dati reali…</div></div><div class="section"><h2>Ultime notizie</h2><span class="pink">Aggiornate</span></div><div id="homeNews"><div class="muted">Caricamento notizie…</div></div>
-</section>
-<section id="palermo" class="page"><div class="section"><h2>🩷 Palermo</h2><span class="pink">2026/27</span></div>
-<div id="palLive" class="card"><div class="muted">Caricamento partita…</div></div><div class="section"><h2>Calendario e risultati</h2></div><div id="palGames"><div class="muted">Caricamento…</div></div><div class="section"><h2>Notizie Palermo</h2></div><div id="palNews"><div class="muted">Caricamento…</div></div>
-</section>
-<section id="b" class="page"><div class="section"><h2>⚽ Serie B</h2><span class="pink">2026/27</span></div>
-<div id="bGames" class="card"><div class="muted">Caricamento partite…</div></div><div class="section"><h2>Classifica</h2></div><div id="bTable"><div class="muted">Caricamento classifica reale…</div></div><div class="section"><h2>Classifica marcatori</h2></div><div id="bScorers"><div class="muted">Caricamento marcatori…</div></div><div class="section"><h2>News Serie B</h2></div><div id="bNews"><div class="muted">Caricamento news…</div></div>
-</section>
-<section id="a" class="page"><div class="section"><h2>🏆 Serie A</h2><span class="pink">2026/27</span></div><div id="aGames" class="card"><div class="muted">Caricamento partite…</div></div><div class="section"><h2>Classifica</h2></div><div id="aTable"><div class="muted">Caricamento classifica reale…</div></div><div class="section"><h2>Classifica marcatori</h2></div><div id="aScorers"><div class="muted">Caricamento marcatori…</div></div><div class="section"><h2>News Serie A</h2></div><div id="aNews"><div class="muted">Caricamento news…</div></div></section>
-<section id="news" class="page"><div class="section"><h2>📰 Notizie</h2></div><div id="allNews"><div class="muted">Caricamento notizie reali…</div></div></section>
-<section id="results" class="page"><div class="section"><h2>🥅 Risultati</h2></div><div class="card live"><b>📡 RISULTATI IN TEMPO REALE</b><p class="muted">Partite di Serie A e Serie B. Le gare in corso sono evidenziate con LIVE.</p><div id="scores" style="margin-top:10px"><div class="muted">Caricamento…</div></div></div></section>
-</main>
-<nav>
-<button class="nav active" data-page="home"><span>⌂</span>Home</button><button class="nav" data-page="palermo"><span>🩷</span>Palermo</button><button class="nav" data-page="b"><span>⚽</span>Serie B</button><button class="nav" data-page="a"><span>🏆</span>Serie A</button><button class="nav" data-page="news"><span>📰</span>News</button><button class="nav" data-page="results"><span>🥅</span>Risultati</button>
-</nav></div>
-<script>
-const BASE='https://site.api.espn.com/apis/site/v2/sports/soccer/';
-const PAL='2923';
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function api(path){const r=await fetch(BASE+path,{cache:'no-store'});if(!r.ok)throw Error(r.status);return r.json()}
-function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));scrollTo(0,0);if(id==='home')loadHome();if(id==='palermo')loadPalermo();if(id==='b')loadLeague('ita.2','bTable');if(id==='a')loadLeague('ita.1','aTable');if(id==='news')loadAllNews();if(id==='results')loadScoresAll()}
-document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>go(x.dataset.page));
-function teams(e){const c=e.competitions?.[0]?.competitors||[];return {h:c.find(x=>x.homeAway==='home')||c[0]||{},a:c.find(x=>x.homeAway==='away')||c[1]||{}}}
-function date(v){return new Intl.DateTimeFormat('it-IT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(v))}
-function teamName(x){return x?.team?.displayName||x?.team?.shortDisplayName||x?.team?.name||x?.team?.abbreviation||'Squadra'}
-function game(e){const {h,a}=teams(e);const hs=h.score?.displayValue??h.score??null,as=a.score?.displayValue??a.score??null;const score=hs!=null&&as!=null?`${hs} - ${as}`:'—';const typ=e.status?.type||{};const isLive=typ.state==='in'||/live|intervallo|tempo/i.test(typ.detail||'');const st=statusIT(typ.shortDetail||typ.detail||typ.description||'');const label=isLive?`<span class="liveBadge"><span class="dot"></span> LIVE</span> · ${esc(st)}`:esc(st);return `<div class="news ${isLive?'liveNow':''}"><small>${esc(date(e.date))} · ${label}</small><b>${esc(teamName(h))} <span class="pink">${score}</span> ${esc(teamName(a))}</b>${isLive?'<a href="#" onclick="event.preventDefault();go(\'results\')">Apri la diretta →</a>':''}</div>`}
-const statusIT=s=>{const m={'Final':'Terminata','Scheduled':'In programma','Postponed':'Rinviata','Canceled':'Annullata','Cancelled':'Annullata','Halftime':'Intervallo','Full Time':'Fine partita','1st Half':'1° tempo','2nd Half':'2° tempo','Extra Time':'Tempi supplementari','Penalties':'Calci di rigore'};return m[s]||s||''};
-const trCache=JSON.parse(localStorage.getItem('ave_tr_it')||'{}');
-async function trIT(text){text=String(text||'').trim();if(!text)return '';if(trCache[text])return trCache[text];try{const q=text.slice(0,500);const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=en|it&mt=1`);const d=await r.json();const t=d.responseData?.translatedText||text;trCache[text]=t;localStorage.setItem('ave_tr_it',JSON.stringify(trCache));return t}catch(e){return text}}
-async function newsHTML(d){const a=(d.articles||[]).slice(0,12);if(!a.length)return '<div class="muted">Nessuna notizia disponibile.</div>';const out=await Promise.all(a.map(async n=>{const h=await trIT(n.headline||n.title||'');const p=await trIT(n.description||'');const url=n.links?.web?.href||n.links?.[0]?.href||n.link||n.url||'';return `<div class="news tap" onclick="${url?`window.open(${JSON.stringify(url)},'_blank','noopener')`:''}"><small>${esc(n._camp||'NOTIZIA')}</small><b>${esc(h)}</b>${p?`<p>${esc(p)}</p>`:''}${url?'<a href="'+esc(url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">Leggi l'approfondimento →</a>':''}</div>`}));return out.join('')}
-function liveGame(e){const {h,a}=teams(e);const hs=h.score?.displayValue??h.score??0,as=a.score?.displayValue??a.score??0;const st=e.status?.type||{};const detail=st.shortDetail||st.detail||'LIVE';return `<div class="news liveNow"><small><span class="liveBadge"><span class="dot"></span> LIVE</span> · ${esc(e._camp||'CALCIO')} · ${esc(detail)}</small><b>${esc(teamName(h))} <span class="pink result">${esc(hs)} - ${esc(as)}</span> ${esc(teamName(a))}</b><a href="#" onclick="event.preventDefault();go('results')">Apri la diretta →</a></div>`}
-async function loadHome(){try{const [b,a]=await Promise.all([api('ita.2/scoreboard'),api('ita.1/scoreboard')]);const events=[...(b.events||[]).map(e=>({...e,_camp:'SERIE B'})),...(a.events||[]).map(e=>({...e,_camp:'SERIE A'}))];const pal=events.find(e=>{const t=teams(e);return t.h.team?.id===PAL||t.a.team?.id===PAL});document.getElementById('homePalermo').innerHTML=pal?game(pal):'<div class="muted">Nessuna partita del Palermo oggi.</div>';const live=events.filter(e=>{const st=e.status?.type||{};return st.state==='in'||st.name==='STATUS_IN_PROGRESS'||st.shortDetail==='Live'||/live|intervallo|tempo/i.test(st.detail||'')});document.getElementById('homeLive').innerHTML=live.length?live.sort((x,y)=>((teams(x).h.team?.id===PAL||teams(x).a.team?.id===PAL)?-1:0)-((teams(y).h.team?.id===PAL||teams(y).a.team?.id===PAL)?-1:0)).map(liveGame).join(''):'<div class="muted">Nessuna partita di Serie A o B in corso in questo momento.</div>';const n=await api('ita.2/news');document.getElementById('homeNews').innerHTML=await newsHTML(n);document.getElementById('liveClock').textContent=new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){document.getElementById('homeLive').innerHTML='<div class="muted">Dati live momentaneamente non disponibili. Riprovo automaticamente.</div>';document.getElementById('homePalermo').innerHTML='<div class="muted">Dati live momentaneamente non disponibili.</div>'}}
-async function loadPalermo(){try{const d=await api(`ita.2/teams/${PAL}/schedule?season=2026&limit=100`);const ev=d.events||[];const next=ev.filter(e=>new Date(e.date)>=new Date()).slice(0,5);const prev=ev.filter(e=>new Date(e.date)<new Date()).slice(-5).reverse();const all=[...next,...prev];document.getElementById('palLive').innerHTML=next[0]?game(next[0]):'<div class="muted">Nessuna prossima partita trovata.</div>';document.getElementById('palGames').innerHTML=all.map(game).join('')||'<div class="muted">Nessuna partita trovata.</div>';const n=await api(`ita.2/news`);document.getElementById('palNews').innerHTML=await newsHTML(n)}catch(e){document.getElementById('palLive').innerHTML='<div class="muted">Dati Palermo non disponibili.</div>'}}
-async function loadLeague(league,tableId){try{const d=await api(league+'/scoreboard');const box=league==='ita.2'?document.getElementById('bGames'):document.getElementById('aGames');box.innerHTML=(d.events||[]).slice(0,8).map(game).join('')||'<div class="muted">Nessuna partita disponibile.</div>';await standings(league,tableId);await loadScorers(league,league==='ita.2'?'bScorers':'aScorers');await loadNews(league,league==='ita.2'?'bNews':'aNews')}catch(e){}}
-async function standings(league,tableId){const target=tableId==='bTable'?document.getElementById('bTable'):document.getElementById('aTable');try{const d=await fetch(`https://site.web.api.espn.com/apis/v2/sports/soccer/${league}/standings?season=2026`).then(r=>r.json());const es=d.children?.flatMap(c=>c.standings?.entries||[])||[];const rows=es.map((x,i)=>{const st=Object.fromEntries((x.stats||[]).map(z=>[z.name,z.value]));return {n:teamName({team:x.team}),id:x.team?.id,g:st.gamesPlayed||st.gp||'',v:st.wins||'',n2:st.ties||st.draws||'',p:st.losses||'',dr:st.pointDifferential||st.goalDifference||'',pt:st.points||st.pts||''}});target.innerHTML='<table><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>N</th><th>P</th><th>DR</th><th>PT</th></tr>'+rows.map((r,i)=>`<tr class="${r.id===PAL?'me':''}"><td>${i+1}</td><td><b>${esc(r.n)}</b></td><td>${r.g}</td><td>${r.v}</td><td>${r.n2}</td><td>${r.p}</td><td>${r.dr}</td><td><b>${r.pt}</b></td></tr>`).join('')+'</table>'}catch(e){target.innerHTML='<div class="muted">Classifica non disponibile in questo momento.</div>'}}
 
-async function loadScorers(league,target){try{const d=await api(league+'/leaders');const cats=d.leaders||d.categories||[];let cat=cats.find(x=>/goal|score|gol/i.test(x.name||x.displayName||x.type||''))||cats[0];const leaders=cat?.leaders||[];if(!leaders.length){document.getElementById(target).innerHTML='<div class="muted">Marcatori non disponibili.</div>';return}document.getElementById(target).innerHTML='<table><tr><th>#</th><th>Giocatore</th><th>Squadra</th><th>Gol</th></tr>'+leaders.slice(0,20).map((x,i)=>{const a=x.athlete||x.player||{};const v=x.value??x.displayValue??x.statistics?.value??'';return `<tr><td>${i+1}</td><td><b>${esc(a.displayName||a.fullName||x.name||'Giocatore')}</b></td><td>${esc(x.team?.displayName||x.team?.shortDisplayName||a.team?.displayName||'')}</td><td><b>${esc(v)}</b></td></tr>`}).join('')+'</table>'}catch(e){document.getElementById(target).innerHTML='<div class="muted">Classifica marcatori non disponibile in questo momento.</div>'}}
-async function loadAllNews(){try{const [a,b]=await Promise.all([api('ita.1/news'),api('ita.2/news')]);const aa=(a.articles||[]).map(x=>({...x,_camp:'SERIE A'}));const bb=(b.articles||[]).map(x=>({...x,_camp:'SERIE B'}));const d={articles:[...aa,...bb].sort((x,y)=>new Date(y.published||0)-new Date(x.published||0))};document.getElementById('allNews').innerHTML=await newsHTML(d)}catch(e){document.getElementById('allNews').innerHTML='<div class="muted">News non disponibili.</div>'}}
-async function loadScoresAll(){try{const [a,b]=await Promise.all([api('ita.1/scoreboard'),api('ita.2/scoreboard')]);const ev=[...(a.events||[]).map(e=>({...e,_camp:'SERIE A'})),...(b.events||[]).map(e=>({...e,_camp:'SERIE B'}))].sort((x,y)=>new Date(x.date)-new Date(y.date));document.getElementById('scores').innerHTML=ev.map(e=>game(e)).join('')||'<div class="muted">Nessuna partita disponibile oggi.</div>'}catch(e){document.getElementById('scores').innerHTML='<div class="muted">Risultati live non disponibili.</div>'}}
-async function loadNews(league,target){try{document.getElementById(target).innerHTML=await newsHTML(await api(league+'/news'))}catch(e){document.getElementById(target).innerHTML='<div class="muted">News non disponibili.</div>'}}
-async function loadScores(league){try{document.getElementById('scores').innerHTML=(await api(league+'/scoreboard')).events?.map(game).join('')||'<div class="muted">Nessuna partita oggi.</div>'}catch(e){document.getElementById('scores').innerHTML='<div class="muted">Risultati non disponibili.</div>'}}
-loadHome();
-setInterval(loadHome,15000);setInterval(()=>{const active=document.querySelector('.page.active')?.id;if(active==='results')loadScoresAll();if(active==='palermo')loadPalermo();},15000);
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script></body></html>
+<style>
+:root{
+  --pink:#f08bb2;
+  --bg:#07090b;
+  --card:#15191d;
+  --line:#292f35;
+  --muted:#9ba3aa
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif
+}
+
+.app{
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+  background:var(--bg);
+  padding-bottom:84px
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#090b0eee;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #181c20;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  border:2px solid var(--pink);
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:21px
+}
+
+.brand{
+  font-size:13px;
+  font-weight:900;
+  line-height:1.05
+}
+
+.brand small{
+  display:block;
+  color:var(--pink);
+  font-size:7px;
+  letter-spacing:1.2px;
+  margin-top:4px
+}
+
+main{padding:12px}
+
+.page{display:none}
+
+.page.active{display:block}
+
+.hero{
+  border-radius:19px;
+  padding:20px;
+  min-height:190px;
+  display:flex;
+  align-items:end;
+  background:radial-gradient(circle at 75% 15%,#793e58,#24151d 43%,#0b0e11 82%)
+}
+
+.kicker{
+  color:var(--pink);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px
+}
+
+.hero h1{
+  font-size:27px;
+  margin:6px 0
+}
+
+.hero p{
+  color:#d3d8dc;
+  font-size:12px;
+  line-height:1.45
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:14px;
+  margin-top:10px
+}
+
+.live{
+  border-color:#854a67;
+  background:linear-gradient(145deg,#24131c,#15191d)
+}
+
+.live b{font-size:18px}
+
+.pink{color:var(--pink)}
+
+.muted{
+  color:var(--muted);
+  font-size:10px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px
+}
+
+.tile{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  min-height:96px;
+  cursor:pointer
+}
+
+.tile.hot{border-color:#814861}
+
+.ico{font-size:23px}
+
+.tile b{
+  display:block;
+  margin-top:7px;
+  font-size:13px
+}
+
+.tile small{
+  color:var(--muted);
+  font-size:9px
+}
+
+.section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:17px 2px 8px
+}
+
+.section h2{
+  font-size:15px;
+  margin:0
+}
+
+.news{
+  padding:12px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  margin-top:8px
+}
+
+.news small{
+  color:var(--pink);
+  font-weight:900;
+  font-size:8px
+}
+
+.news b{
+  display:block;
+  font-size:12px;
+  margin-top:4px
+}
+
+.news p{
+  font-size:9px;
+  color:var(--muted);
+  margin:5px 0
+}
+
+.news a{
+  display:inline-block;
+  margin-top:8px;
+  color:var(--pink);
+  font-size:9px;
+  font-weight:900;
+  text-decoration:none
+}
+
+.liveBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:#ff6b7a;
+  font-size:9px;
+  font-weight:1000
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ff3f56;
+  box-shadow:0 0 8px #ff3f56;
+  display:inline-block
+}
+
+.liveNow{
+  border-color:#9d4d67;
+  box-shadow:0 0 0 1px #5c263d inset
+}
+
+.minute{
+  font-size:10px;
+  color:#f3a0bd;
+  font-weight:900
+}
+
+.tap{cursor:pointer}
+
+.refresh{
+  font-size:9px;
+  color:var(--muted)
+}
+
+.score{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  padding:18px
+}
+
+.team{
+  text-align:center;
+  width:38%;
+  font-size:11px
+}
+
+.badge{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#272c31;
+  display:grid;
+  place-items:center;
+  margin:0 auto 7px;
+  font-weight:900
+}
+
+.pal{
+  background:#291720;
+  color:var(--pink);
+  border:1px solid #80465f
+}
+
+.result{
+  font-size:24px;
+  font-weight:1000
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--card);
+  border:1px solid var(--line);
+  font-size:10px
+}
+
+th,td{
+  padding:9px 6px;
+  border-bottom:1px solid #252a2f;
+  text-align:center
+}
+
+th{
+  font-size:8px;
+  color:var(--muted)
+}
+
+td:nth-child(2){text-align:left}
+
+.me{background:#f08bb211}
+
+button{font:inherit}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:12px;
+  background:var(--pink);
+  color:#160a10;
+  font-weight:900;
+  cursor:pointer
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(480px,100%);
+  height:78px;
+  background:#0a0c0ef8;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  z-index:10
+}
+
+.nav{
+  border:0;
+  background:none;
+  color:#7f878e;
+  font-size:8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  cursor:pointer
+}
+
+.nav.active{color:var(--pink)}
+
+.nav span{font-size:17px}
+
+.notice{
+  display:none;
+  position:fixed;
+  top:65px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(450px,92%);
+  z-index:20;
+  background:#20131a;
+  border:1px solid #8c4d69;
+  border-radius:13px;
+  padding:12px;
+  font-size:11px
+}
+
+.notice.show{display:block}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">⚽</div>
+  <div class="brand">
+    L'INFORMAZIONE IN CASA AVE
+    <small>IL CALCIO SEMPRE CON TE</small>
+  </div>
+  <div style="margin-left:auto;font-size:21px">🔔</div>
+</header>
+
+<div id="notice" class="notice">
+  🔔 <b>Notifiche Palermo</b><br>
+  Qui collegheremo gli avvisi per gol, risultato e novità.
+</div>
+
+<main>
+
+<section id="home" class="page active">
+
+  <div class="hero">
+    <div>
+      <div class="kicker">PALERMO NEL CUORE</div>
+      <h1>Qui non è solo calcio.</h1>
+      <p>La tua app per seguire Palermo, Serie B e Serie A.</p>
+    </div>
+  </div>
+
+  <div class="card live liveNow">
+    <div class="liveBadge">
+      <span class="dot"></span>
+      LIVE IN TEMPO REALE
+      <span id="liveClock" class="minute"></span>
+    </div>
+
+    <div id="homeLive">
+      <p class="muted">Controllo delle partite in corso…</p>
+    </div>
+
+    <div class="refresh">
+      Aggiornamento automatico ogni 15 secondi
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="tile hot" onclick="go('palermo')">
+      <div class="ico">🩷</div>
+      <b>PALERMO</b>
+      <small>Partite e classifica</small>
+    </div>
+
+    <div class="tile" onclick="go('b')">
+      <div class="ico">⚽</div>
+      <b>SERIE B</b>
+      <small>Classifica e marcatori</small>
+    </div>
+
+    <div class="tile" onclick="go('a')">
+      <div class="ico">🏆</div>
+      <b>SERIE A</b>
+      <small>Risultati e calendario</small>
+    </div>
+
+    <div class="tile" onclick="go('news')">
+      <div class="ico">📰</div>
+      <b>NEWS</b>
+      <small>Ultime notizie</small>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <h2>Palermo oggi</h2>
+    <span class="pink">LIVE</span>
+  </div>
+
+  <div id="homePalermo" class="card live">
+    <div class="muted">Caricamento dati reali…</div>
+  </div>
+
+  <div class="section">
+    <h2>Ultime notizie</h2>
+    <span class="pink">Aggiornate</span>
+  </div>
+
+  <div id="homeNews">
+    <div class="muted">Caricamento notizie…</div>
+  </div>
+
+</section>
+
+
+<section id="palermo" class="page">
+
+  <div class="section">
+    <h2>🩷 Palermo</h2>
+    <span class="pink">2026/27</span>
+  </div>
+
+  <div id="palLive" class="card">
+    <div class="muted">Caricamento partita…</div>
+  </div>
+
+  <div class="section">
+    <h2>Calendario e risultati</h2>
+  </div>
+
+  <div id="palGames">
+    <div class="muted">Caricamento…</div>
+  </div>
+
+  <div class="section">
+    <h2>Notizie Palermo</h2>
+  </div>
+
+  <div id="palNews">
+    <div class="muted">Caricamento…</div>
+  </div>
+
+</section>
+
+
+<section id="b" class="page">
+
+  <div class="section">
+    <h2>⚽ Serie B</h2>
+    <span class="pink">2026/27</span>
+  </div>
+
+  <div id="bGames" class="card">
+    <div class="muted">Caricamento partite…</div>
+  </div>
+
+  <div class="section">
+    <h2>Classifica</h2>
+  </div>
+
+  <div id="bTable">
+    <div class="muted">Caricamento classifica reale…</div>
+  </div>
+
+  <div class="section">
+    <h2>Classifica marcatori</h2>
+  </div>
+
+  <div id="bScorers">
+    <div class="muted">Caricamento marcatori…</div>
+  </div>
+
+  <div class="section">
+    <h2>News Serie B</h2>
+  </div>
+
+  <div id="bNews">
+    <div class="muted">Caricamento news…</div>
+  </div>
+
+</section>
+
+
+<section id="a" class="page">
+
+  <div class="section">
+    <h2>🏆 Serie A</h2>
+    <span class="pink">2026/27</span>
+  </div>
+
+  <div id="aGames" class="card">
+    <div class="muted">Caricamento partite…</div>
+  </div>
+
+  <div class="section">
+    <h2>Classifica</h2>
+  </div>
+
+  <div id="aTable">
+    <div class="muted">Caricamento classifica reale…</div>
+  </div>
+
+  <div class="section">
+    <h2>Classifica marcatori</h2>
+  </div>
+
+  <div id="aScorers">
+    <div class="muted">Caricamento marcatori…</div>
+  </div>
+
+  <div class="section">
+    <h2>News Serie A</h2>
+  </div>
+
+  <div id="aNews">
+    <div class="muted">Caricamento news…</div>
+  </div>
+
+</section>
+
+
+<section id="news" class="page">
+
+  <div class="section">
+    <h2>📰 Notizie</h2>
+  </div>
+
+  <div id="
