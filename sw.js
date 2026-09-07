@@ -1,6 +1,6 @@
-const CACHE_NAME = "casa-ave-v8";
+const CACHE_NAME = "casa-ave-v12-live";
 
-const APP_FILES = [
+const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
@@ -9,7 +9,7 @@ const APP_FILES = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
   );
   self.skipWaiting();
 });
